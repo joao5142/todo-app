@@ -19,4 +19,10 @@ export const TextContainer = styled.Text<TextContainerProps>`
 		css`
 			text-align: center;
 		`}
+
+	${({ align }) =>
+		align == "end" &&
+		css`
+			text-align: right;
+		`}
 `;

@@ -1,5 +1,8 @@
-import { TextInput } from "react-native";
+import { TextInputProps } from "react-native";
+import { TextInputContainer } from "./styles";
 
-export function Input() {
-	return <TextInput placeholder="Email" />;
+interface InputProps extends TextInputProps {}
+
+export function Input({ ...rest }: InputProps) {
+	return <TextInputContainer {...rest} />;
 }

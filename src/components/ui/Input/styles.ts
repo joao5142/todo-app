@@ -1,5 +1,12 @@
 import styled from "styled-components/native";
 
-export const TextInputContainer = styled.TextInput`
-	border: 1px solid ${(props) => props.theme.COLORS["GRAY_400"]};
+export const TextInputContainer = styled.TextInput.attrs(({ theme }) => ({
+	placeholderTextColor: theme.COLORS["GRAY_500"],
+}))`
+	padding: 15px;
+	margin-bottom: 16px;
+
+	border-radius: 30px;
+	border-width: 1px;
+	border-color: ${(props) => props.theme.COLORS["GRAY_400"]};
 `;

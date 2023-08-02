@@ -34,20 +34,27 @@ const theme = {
 	},
 };
 
-export interface ColorType {
-	color?: keyof typeof theme.COLORS;
+export type ColorType = keyof typeof theme.COLORS;
+
+export interface IColor {
+	color?: ColorType;
 }
 
-export interface FontSizeType {
-	size?: keyof typeof theme.FONT_SIZE;
+export type FontSizeType = keyof typeof theme.FONT_SIZE;
+
+export interface IFontSize {
+	size?: FontSizeType;
+}
+export type FontWeightType = "regular" | "medium" | "bold";
+
+export interface IFontWeight {
+	weight?: FontWeightType;
 }
 
-export interface FontWeightType {
-	weight?: "regular" | "medium" | "bold";
-}
+export type FontFamilyType = keyof typeof theme.FONT_FAMILY;
 
-export interface FontFamilyType {
-	fontFamily?: keyof typeof theme.FONT_FAMILY;
+export interface IFontFamily {
+	fontFamily?: FontFamilyType;
 }
 
 export default theme;

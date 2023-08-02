@@ -1,11 +1,20 @@
-import { ColorType, FontFamilyType, FontSizeType, FontWeightType } from "@theme/index";
+import {
+	ColorType,
+	FontFamilyType,
+	FontSizeType,
+	FontWeightType,
+	IColor,
+	IFontFamily,
+	IFontSize,
+	IFontWeight,
+} from "@theme/index";
 
 import { TextContainer } from "./styles";
 import { ReactNode } from "react";
 
-export type AlignType = "center" | "start";
+export type AlignType = "center" | "start" | "end";
 
-interface TextProps extends ColorType, FontSizeType, FontFamilyType, FontWeightType {
+interface TextProps extends IColor, IFontSize, IFontFamily, IFontWeight {
 	align?: AlignType;
 	children: ReactNode;
 }
