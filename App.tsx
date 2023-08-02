@@ -1,20 +1,35 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "react-native";
+
+import {
+	useFonts as useRobotoFonts,
+	Roboto_400Regular,
+	Roboto_500Medium,
+	Roboto_700Bold,
+} from "@expo-google-fonts/roboto";
+import { useFonts as useInterFonts, Inter_400Regular, Inter_500Medium, Inter_700Bold } from "@expo-google-fonts/inter";
+import { ThemeProvider } from "styled-components";
+
+import defaultTheme from "@/theme";
+import { Routes } from "@/routes";
+import { Loading } from "@/components/ui/Loading";
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+	const [robotoFontsLoaded] = useRobotoFonts({
+		Roboto_400Regular,
+		Roboto_500Medium,
+		Roboto_700Bold,
+	});
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+	const [interFontsLoaded] = useInterFonts({
+		Inter_400Regular,
+		Inter_500Medium,
+		Inter_700Bold,
+	});
+
+	return (
+		<ThemeProvider theme={defaultTheme}>
+			<StatusBar translucent backgroundColor="transparent" barStyle="light-content" />
+			{robotoFontsLoaded && interFontsLoaded ? <Routes /> : <Loading />}
+		</ThemeProvider>
+	);
+}
