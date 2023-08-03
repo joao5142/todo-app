@@ -4,14 +4,15 @@ import { NavigationContainer } from "@react-navigation/native";
 
 import { AppRoutes } from "./modules/app";
 import { AuthRoutes } from "./modules/auth";
+import { useStore } from "@/store";
 
 export function Routes() {
-	return (
-		<View style={{ flex: 1, backgroundColor: "white" }}>
-			<NavigationContainer>
-				<AuthRoutes />
-				{/* <AppRoutes /> */}
-			</NavigationContainer>
-		</View>
-	);
+  const isUserLogged = useStore((state) => state.isUserLogged);
+  return (
+    <View style={{ flex: 1, backgroundColor: "white" }}>
+      <NavigationContainer>
+        {isUserLogged ? <AppRoutes /> : <AuthRoutes />}
+      </NavigationContainer>
+    </View>
+  );
 }

@@ -6,10 +6,11 @@ import { ColorType } from "@/theme";
 import { ReactNode } from "react";
 
 export interface ButtonProps extends TouchableOpacityProps {
-	background: ColorType;
-	children: ReactNode;
+  background: ColorType;
+  children: ReactNode;
+  wFull?: boolean;
 }
 
 export function Button({ children, ...rest }: ButtonProps) {
-	return <ButtonContainer {...rest}>{children}</ButtonContainer>;
+  return <ButtonContainer {...rest}>{children}</ButtonContainer>;
 }
