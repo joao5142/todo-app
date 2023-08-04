@@ -41,7 +41,7 @@ export function SignUp() {
   });
 
   function handleGoBack() {
-    // navigation.navigate("signIn");
+    navigation.navigate("signIn");
   }
 
   async function handleSignUp(data: FormData) {
