@@ -1,4 +1,5 @@
 import { StatusBar } from "react-native";
+import Toast from "react-native-toast-message";
 
 import {
   useFonts as useRobotoFonts,
@@ -43,6 +44,7 @@ export default function App() {
           barStyle="light-content"
         />
         {robotoFontsLoaded && interFontsLoaded ? <Routes /> : <Loading />}
+        <Toast />
       </SheetProvider>
     </ThemeProvider>
   );

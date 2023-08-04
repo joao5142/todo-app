@@ -5,10 +5,16 @@ type State = {
 };
 
 type Action = {
-  updateUserLogged: (value: State["isUserLogged"]) => void;
+  login: () => void;
+  logout: () => void;
 };
 
 export const useStore = create<State & Action>((set) => ({
   isUserLogged: false,
-  updateUserLogged: (value) => set(() => ({ isUserLogged: value })),
+  login: () => {
+    set(() => ({ isUserLogged: true }));
+  },
+  logout: () => {
+    set(() => ({ isUserLogged: false }));
+  },
 }));
