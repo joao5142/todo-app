@@ -1,15 +1,20 @@
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AppError } from "@/utils/AppError";
+import { TOKEN_COLLECTION } from "@/storage";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:8000/api",
+  baseURL: "http://10.0.2.2:8000/api",
+  timeout: 10000,
 });
 
 const requestHandler = async (request) => {
   try {
-    let token = await AsyncStorage.getItem("token");
-    request.headers.Authorization = "Bearer " + token;
+    let token = await AsyncStorage.getItem(TOKEN_COLLECTION);
+
+    if (token) {
+      request.headers.Authorization = "Bearer " + token;
+    }
   } catch (e) {}
 
   return request;

@@ -1,6 +1,7 @@
 import styled from "styled-components/native";
 
 import { SafeAreaView } from "react-native-safe-area-context";
+import { Text } from "@/components/ui/Text";
 
 export const HomeContainer = styled(SafeAreaView)`
   flex: 1;
@@ -30,7 +31,13 @@ export const TaskContainer = styled(Container)`
   padding-bottom: 18px;
 
   flex-direction: row;
+  align-items: center;
   gap: 16px;
+`;
+
+export const DescriptionText = styled(Text)`
+  flex: 1;
+  flex-wrap: wrap;
 `;
 
 export const DotsViewContainer = styled.View`
@@ -57,7 +64,7 @@ export const Navigation = styled(Container)`
   background-color: ${(props) => props.theme.COLORS.WHITE};
 
   border-top-color: #1fcc7920;
-  border-top-width: 3;
+  border-top-width: 3px;
 `;
 export const NavigationItem = styled.TouchableOpacity`
   align-items: center;

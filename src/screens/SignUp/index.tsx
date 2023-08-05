@@ -9,7 +9,7 @@ import { Input } from "@components/ui/Input";
 import { Button } from "@components/ui/Button";
 import { Box } from "@components/wrappers/Box";
 
-import { TouchableOpacity } from "react-native";
+import { ActivityIndicator, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useStore } from "@/store";
 
@@ -18,8 +18,12 @@ import { Controller, useForm } from "react-hook-form";
 import { createUserSchema } from "@/schema/createUserSchema";
 
 import { yupResolver } from "@hookform/resolvers/yup";
+
 import Toast from "react-native-toast-message";
-import api from "@/lib/axios";
+
+import api from "@/lib/api";
+import { AxiosError } from "axios";
+import { useState } from "react";
 
 type FormData = {
   name: string;
@@ -30,7 +34,8 @@ type FormData = {
 
 export function SignUp() {
   const navigation = useNavigation();
-  const login = useStore((state) => state.login);
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     control,
@@ -45,22 +50,26 @@ export function SignUp() {
   }
 
   async function handleSignUp(data: FormData) {
-    // login();
-    console.log(data);
+    setIsLoading(true);
 
     try {
-      const response = await api.post("/user/save", { data });
+      const {
+        data: { message },
+      } = await api.post("/user/save", data);
 
       Toast.show({
         type: "success",
-        text1: "Usúario adicionado com sucesso",
+        text1: message,
       });
     } catch (err) {
-      console.log(err.response);
+      const error = err as AxiosError;
+
       Toast.show({
         type: "error",
-        text1: err?.response?.errors || "Error ao adicionar um usúario.",
+        text1: error.message || "Error ao adicionar um usúario.",
       });
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -129,10 +138,18 @@ export function SignUp() {
         />
 
         <Box marginTop={70}>
-          <Button background="GREEN_300" onPress={handleSubmit(handleSignUp)}>
-            <Text color="WHITE" fontFamily="secondary" weight="bold">
-              Sign Up
-            </Text>
+          <Button
+            disabled={isLoading}
+            background="GREEN_300"
+            onPress={handleSubmit(handleSignUp)}
+          >
+            {isLoading ? (
+              <ActivityIndicator size={24} color="white" />
+            ) : (
+              <Text color="WHITE" fontFamily="secondary" weight="bold">
+                Sign Up
+              </Text>
+            )}
           </Button>
         </Box>
       </FormContainer>
