@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosRequestHeaders } from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AppError } from "@/utils/AppError";
 import { TOKEN_COLLECTION } from "@/storage";
@@ -8,7 +8,7 @@ const axiosInstance = axios.create({
   timeout: 10000,
 });
 
-const requestHandler = async (request) => {
+const requestHandler = async (request: AxiosRequestHeaders) => {
   try {
     let token = await AsyncStorage.getItem(TOKEN_COLLECTION);
 
